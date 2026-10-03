@@ -236,6 +236,68 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Serial Tutorial Rekayasa Teknologi Modern 2026 -->
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-membangun-mcp-server-typescript-ai-agent</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-setup-ollama-local-llm-coding-offline</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-rag-postgresql-pgvector-semantic-search</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-golang-worker-pool-concurrency-api</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-optimasi-dockerfile-multi-stage-build</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-redis-streams-event-driven-architecture</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-serverless-api-cloudflare-workers-d1</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-git-interactive-rebase-dan-bisect</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-esp32-deep-sleep-manajemen-daya-baterai</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/tutorial-mql5-manajemen-risiko-stop-loss-drawdown</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Halaman Dokumen Legal -->
   <url>
     <loc>https://wahidalimudin.web.id/terms</loc>
