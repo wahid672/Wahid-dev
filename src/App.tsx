@@ -7,10 +7,10 @@ import { TechStack } from './components/TechStack';
 import { AffiliateShowcase } from './components/AffiliateShowcase';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { LatestBlogCarousel } from './components/LatestBlogCarousel';
 import { resetHomeSeo } from './utils/seo';
 
-// Code-splitting via dynamic import untuk rute halaman sekunder
+// Code-splitting via dynamic import untuk rute halaman sekunder dan komponen blog
+const LatestBlogCarousel = lazy(() => import('./components/LatestBlogCarousel').then((m) => ({ default: m.LatestBlogCarousel })));
 const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
 const LegalPage = lazy(() => import('./components/LegalPage').then((m) => ({ default: m.LegalPage })));
 
@@ -179,7 +179,9 @@ export const App: React.FC = () => {
         <FoundedProducts />
         <Mql5Services />
         <TechStack />
-        <LatestBlogCarousel onOpenBlog={handleOpenBlog} />
+        <Suspense fallback={null}>
+          <LatestBlogCarousel onOpenBlog={handleOpenBlog} />
+        </Suspense>
         <AffiliateShowcase />
         <ContactSection />
       </main>
