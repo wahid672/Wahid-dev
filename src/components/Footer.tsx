@@ -36,13 +36,8 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-obsidian-850 text-slate-500 text-[11px]">
-          <div>
-            &copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.
-          </div>
-          <div className="font-mono">
-            React + TypeScript
-          </div>
+        <div className="pt-4 border-t border-slate-200 dark:border-obsidian-850 text-slate-500 text-[11px] text-center sm:text-left">
+          &copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.
         </div>
       </div>
     </footer>
