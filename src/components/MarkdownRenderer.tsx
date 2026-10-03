@@ -70,7 +70,7 @@ function renderInlineFormatting(text: string): React.ReactNode[] {
       return (
         <code
           key={index}
-          className="px-1.5 py-0.5 rounded font-mono text-[0.85em] bg-slate-200 dark:bg-obsidian-800 text-emerald-700 dark:text-emerald-400 border border-slate-300/80 dark:border-obsidian-700/80"
+          className="px-1.5 py-0.5 rounded font-mono text-[0.85em] bg-slate-200 dark:bg-obsidian-800 text-emerald-700 dark:text-emerald-400 border border-slate-300/80 dark:border-obsidian-700/80 break-all sm:break-words [overflow-wrap:anywhere]"
         >
           {part.substring(1, part.length - 1)}
         </code>
@@ -108,7 +108,7 @@ function renderInlineFormatting(text: string): React.ReactNode[] {
           href={linkHref}
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
-          className="inline-flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-2 font-medium"
+          className="inline-flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-2 font-medium break-words [overflow-wrap:anywhere]"
         >
           <span>{linkText}</span>
           {isExternal && <ExternalLinkIcon className="w-3.5 h-3.5 inline ml-0.5 opacity-80" />}
@@ -324,9 +324,9 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
         i++;
       }
       elements.push(
-        <ul key={elementKey++} className="my-4 space-y-2 list-disc pl-6 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+        <ul key={elementKey++} className="my-4 space-y-2 list-disc pl-6 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed break-words [overflow-wrap:anywhere] min-w-0">
           {listItems.map((item, itemIdx) => (
-            <li key={itemIdx}>{renderInlineFormatting(item)}</li>
+            <li key={itemIdx} className="break-words [overflow-wrap:anywhere] min-w-0">{renderInlineFormatting(item)}</li>
           ))}
         </ul>
       );
@@ -341,9 +341,9 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
         i++;
       }
       elements.push(
-        <ol key={elementKey++} className="my-4 space-y-2 list-decimal pl-6 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+        <ol key={elementKey++} className="my-4 space-y-2 list-decimal pl-6 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed break-words [overflow-wrap:anywhere] min-w-0">
           {listItems.map((item, itemIdx) => (
-            <li key={itemIdx}>{renderInlineFormatting(item)}</li>
+            <li key={itemIdx} className="break-words [overflow-wrap:anywhere] min-w-0">{renderInlineFormatting(item)}</li>
           ))}
         </ol>
       );
@@ -360,7 +360,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
     elements.push(
       <p
         key={elementKey++}
-        className="my-4 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed"
+        className="my-4 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed break-words [overflow-wrap:anywhere] min-w-0"
       >
         {renderInlineFormatting(line)}
       </p>
@@ -368,5 +368,5 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
     i++;
   }
 
-  return <div className="markdown-body space-y-2">{elements}</div>;
+  return <div className="markdown-body space-y-2 break-words [overflow-wrap:anywhere] min-w-0 w-full">{elements}</div>;
 };

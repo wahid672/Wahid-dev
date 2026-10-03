@@ -200,7 +200,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
       <main className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
         {/* VIEW 1: SINGLE ARTICLE DETAIL */}
         {currentPost ? (
-          <article className="max-w-4xl mx-auto space-y-8">
+          <article className="max-w-4xl mx-auto space-y-8 min-w-0 w-full overflow-hidden">
             {/* Breadcrumb Navigation */}
             <nav aria-label="Breadcrumb" className="text-xs font-mono text-slate-500 dark:text-slate-400 flex flex-wrap items-center gap-2">
               <button
@@ -353,9 +353,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             )}
 
             {/* Content & Desktop TOC Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 min-w-0 w-full">
               {/* Main Markdown Body */}
-              <div className="lg:col-span-3">
+              <div className="lg:col-span-3 min-w-0 w-full">
                 <MarkdownRenderer content={currentPost.content} />
 
                 {/* Article Tags */}

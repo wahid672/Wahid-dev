@@ -75,7 +75,7 @@ curl -sL https://github.com/termuxvoid/repo/raw/main/install.sh | bash
 **Mekanisme Kerja Script:**
 1. Mengunduh script installer resmi dari repositori Termux Void via `curl` secara senyap (`-sL`).
 2. Mendaftarkan kunci penandatanganan GPG resmi agar integritas paket terjamin keasliannya.
-3. Menambahkan alamat repositori Termux Void ke direktori konfigurasi sumber APT (`/data/data/com.termux/files/usr/etc/apt/sources.list.d/`).
+3. Menambahkan alamat repositori Termux Void ke direktori konfigurasi sumber APT di folder `sources.list.d/` (lokasi: `/data/data/com.termux/files/usr/etc/apt/sources.list.d/`).
 4. Menjalankan sinkronisasi indeks paket secara otomatis sehingga katalog paket baru langsung dikenali oleh Termux.
 
 ---
