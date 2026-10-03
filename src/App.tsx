@@ -9,6 +9,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { LegalPage } from './components/LegalPage';
 import { BlogPage } from './components/BlogPage';
+import { LatestBlogCarousel } from './components/LatestBlogCarousel';
 import { resetHomeSeo } from './utils/seo';
 
 export const App: React.FC = () => {
@@ -163,6 +164,7 @@ export const App: React.FC = () => {
         <FoundedProducts />
         <Mql5Services />
         <TechStack />
+        <LatestBlogCarousel onOpenBlog={handleOpenBlog} />
         <AffiliateShowcase />
         <ContactSection />
       </main>
