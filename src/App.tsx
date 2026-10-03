@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { FoundedProducts } from './components/FoundedProducts';
@@ -7,10 +7,21 @@ import { TechStack } from './components/TechStack';
 import { AffiliateShowcase } from './components/AffiliateShowcase';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { LegalPage } from './components/LegalPage';
-import { BlogPage } from './components/BlogPage';
 import { LatestBlogCarousel } from './components/LatestBlogCarousel';
 import { resetHomeSeo } from './utils/seo';
+
+// Code-splitting via dynamic import untuk rute halaman sekunder
+const BlogPage = lazy(() => import('./components/BlogPage').then((m) => ({ default: m.BlogPage })));
+const LegalPage = lazy(() => import('./components/LegalPage').then((m) => ({ default: m.LegalPage })));
+
+const PageLoadingFallback: React.FC = () => (
+  <div className="min-h-screen bg-slate-50 dark:bg-obsidian-900 flex items-center justify-center p-4">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+      <span className="text-xs text-slate-500 font-mono">Memuat halaman...</span>
+    </div>
+  </div>
+);
 
 export const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -135,24 +146,28 @@ export const App: React.FC = () => {
 
   if (currentRoute === 'blog') {
     return (
-      <BlogPage
-        initialSlug={blogSlug}
-        onNavigateHome={handleBackToHome}
-        onNavigateBlog={handleOpenBlog}
-        darkMode={darkMode}
-        toggleDarkMode={toggleDarkMode}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <BlogPage
+          initialSlug={blogSlug}
+          onNavigateHome={handleBackToHome}
+          onNavigateBlog={handleOpenBlog}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+      </Suspense>
     );
   }
 
   if (currentRoute === 'terms' || currentRoute === 'privacy') {
     return (
-      <LegalPage
-        initialTab={currentRoute}
-        onBackToHome={handleBackToHome}
-        darkMode={darkMode}
-        toggleDarkMode={toggleDarkMode}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <LegalPage
+          initialTab={currentRoute}
+          onBackToHome={handleBackToHome}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+      </Suspense>
     );
   }
 
