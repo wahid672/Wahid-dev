@@ -50,6 +50,18 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   useEffect(() => {
     setActiveSlug(initialSlug);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Restore cached HitPulse counts in BlogPage footer
+    const cachedTotal = sessionStorage.getItem('hp_total');
+    const cachedToday = sessionStorage.getItem('hp_today');
+    if (cachedTotal || cachedToday) {
+      document.querySelectorAll<HTMLElement>('[data-hitpulse="total"]').forEach((el) => {
+        if (cachedTotal) el.textContent = cachedTotal;
+      });
+      document.querySelectorAll<HTMLElement>('[data-hitpulse="today"]').forEach((el) => {
+        if (cachedToday) el.textContent = cachedToday;
+      });
+    }
   }, [initialSlug]);
 
   const allPosts = useMemo(() => getAllPosts(), []);
@@ -643,8 +655,11 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             <span className="mx-2">&bull;</span>
             <span>Blog &amp; Tutorial Teknikal</span>
           </div>
-          <div>
-            &copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-600 dark:text-slate-400 bg-slate-200/60 dark:bg-obsidian-900 px-2.5 py-1 rounded border border-slate-300/60 dark:border-obsidian-800">
+              Total: <span data-hitpulse="total">0</span> · Hari ini: <span data-hitpulse="today">0</span>
+            </span>
+            <span>&copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.</span>
           </div>
         </div>
       </footer>

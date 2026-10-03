@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface FooterProps {
   onOpenLegal?: (tab: 'terms' | 'privacy') => void;
@@ -6,6 +6,38 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenBlog }) => {
+  useEffect(() => {
+    // Restore cached counts on SPA page transitions
+    const cachedTotal = sessionStorage.getItem('hp_total');
+    const cachedToday = sessionStorage.getItem('hp_today');
+    if (cachedTotal || cachedToday) {
+      document.querySelectorAll<HTMLElement>('[data-hitpulse="total"]').forEach((el) => {
+        if (cachedTotal) el.textContent = cachedTotal;
+      });
+      document.querySelectorAll<HTMLElement>('[data-hitpulse="today"]').forEach((el) => {
+        if (cachedToday) el.textContent = cachedToday;
+      });
+    }
+
+    // Cache updated values from HitPulse API response
+    const observer = new MutationObserver(() => {
+      const totalEl = document.querySelector<HTMLElement>('[data-hitpulse="total"]');
+      const todayEl = document.querySelector<HTMLElement>('[data-hitpulse="today"]');
+      if (totalEl && totalEl.textContent && totalEl.textContent !== '0') {
+        sessionStorage.setItem('hp_total', totalEl.textContent);
+      }
+      if (todayEl && todayEl.textContent && todayEl.textContent !== '0') {
+        sessionStorage.setItem('hp_today', todayEl.textContent);
+      }
+    });
+
+    const target = document.querySelector('footer');
+    if (target) {
+      observer.observe(target, { childList: true, subtree: true, characterData: true });
+    }
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <footer className="bg-slate-100 dark:bg-obsidian-950 text-slate-600 dark:text-slate-400 py-12 border-t border-slate-200 dark:border-obsidian-800 text-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -54,8 +86,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenBlog }) => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-obsidian-850 text-slate-500 text-[11px]">
-          <div>
-            &copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <span>&copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.</span>
+            <span className="hidden sm:inline text-slate-300 dark:text-obsidian-700">&bull;</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-600 dark:text-slate-400 bg-slate-200/60 dark:bg-obsidian-900 px-2.5 py-1 rounded border border-slate-300/60 dark:border-obsidian-800">
+              Total: <span data-hitpulse="total">0</span> · Hari ini: <span data-hitpulse="today">0</span>
+            </span>
           </div>
           <div className="flex items-center gap-4">
             <button
