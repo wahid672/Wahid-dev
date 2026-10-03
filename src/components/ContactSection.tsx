@@ -22,7 +22,7 @@ export const ContactSection: React.FC = () => {
     const encodedMessage = encodeURIComponent(
       `Halo Mas Wahid, nama saya ${clientName || 'Klien'}.\n\nSaya tertarik konsultasi proyek:\nJenis: ${projectType}\nKebutuhan: ${projectBrief || 'Mohon info ketersediaan waktu dan alur pengerjaan.'}`
     );
-    window.open(`https://wa.me/6281234567890?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/6281540983390?text=${encodedMessage}`, '_blank');
   };
 
   return (
@@ -54,21 +54,21 @@ export const ContactSection: React.FC = () => {
                   <div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">WhatsApp Resmi</div>
                     <div className="font-mono text-sm font-bold text-slate-900 dark:text-slate-100">
-                      +62 812-3456-7890
+                      +62 815-4098-3390
                     </div>
                   </div>
                 </div>
                 <div className="flex gap-1.5">
                   <button
                     type="button"
-                    onClick={() => handleCopy('+6281234567890', 'wa')}
+                    onClick={() => handleCopy('+6281540983390', 'wa')}
                     aria-label="Salin nomor WhatsApp"
                     className="min-h-[44px] min-w-[44px] p-2 text-xs rounded-lg border border-slate-300 dark:border-obsidian-700 bg-slate-50 dark:bg-obsidian-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-obsidian-800 transition-colors flex items-center justify-center focus-visible:ring-2 focus-visible:ring-emerald-500"
                   >
                     {copiedField === 'wa' ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <CopyIcon className="w-4 h-4" />}
                   </button>
                   <a
-                    href="https://wa.me/6281234567890?text=Halo%20Mas%20Wahid,%20saya%20tertarik%20konsultasi%20proyek"
+                    href="https://wa.me/6281540983390?text=Halo%20Mas%20Wahid,%20saya%20tertarik%20konsultasi%20proyek"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="min-h-[44px] px-3 py-2 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors flex items-center justify-center focus-visible:ring-2 focus-visible:ring-emerald-500"

@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
             &copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.
           </div>
           <div className="font-mono">
-            React + Vite | Siap Hosting di Cloudflare Pages
+            React + TypeScript
           </div>
         </div>
       </div>

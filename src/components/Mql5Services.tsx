@@ -109,7 +109,7 @@ export const Mql5Services: React.FC = () => {
               <span>Semua logika strategi dan source code klien dijaga kerahasiaannya.</span>
             </div>
             <a
-              href="https://wa.me/6281234567890?text=Halo%20Mas%20Wahid,%20saya%20ingin%20konsultasi%20pembuatan%20Robot%20Trading%20EA%20MQL5%20MT5"
+              href="https://wa.me/6281540983390?text=Halo%20Mas%20Wahid,%20saya%20ingin%20konsultasi%20pembuatan%20Robot%20Trading%20EA%20MQL5%20MT5"
               target="_blank"
               rel="noopener noreferrer"
               className="min-h-[44px] inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
