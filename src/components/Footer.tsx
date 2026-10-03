@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenLegal?: (tab: 'terms' | 'privacy') => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   return (
     <footer className="bg-slate-100 dark:bg-obsidian-950 text-slate-600 dark:text-slate-400 py-12 border-t border-slate-200 dark:border-obsidian-800 text-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -36,8 +40,27 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        <div className="pt-4 border-t border-slate-200 dark:border-obsidian-850 text-slate-500 text-[11px] text-center sm:text-left">
-          &copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-obsidian-850 text-slate-500 text-[11px]">
+          <div>
+            &copy; 2026 Wahid Alimudin. Hak Cipta Dilindungi.
+          </div>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() => onOpenLegal?.('terms')}
+              className="hover:text-emerald-600 dark:hover:text-emerald-400 underline underline-offset-2"
+            >
+              Syarat &amp; Ketentuan
+            </button>
+            <span>&bull;</span>
+            <button
+              type="button"
+              onClick={() => onOpenLegal?.('privacy')}
+              className="hover:text-emerald-600 dark:hover:text-emerald-400 underline underline-offset-2"
+            >
+              Kebijakan Privasi
+            </button>
+          </div>
         </div>
       </div>
     </footer>

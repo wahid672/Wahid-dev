@@ -7,6 +7,7 @@ import { TechStack } from './components/TechStack';
 import { AffiliateShowcase } from './components/AffiliateShowcase';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { LegalPage } from './components/LegalPage';
 
 export const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -16,6 +17,18 @@ export const App: React.FC = () => {
       return true; // Default dark mode for developer & trading terminal theme
     } catch {
       return true;
+    }
+  });
+
+  const [currentRoute, setCurrentRoute] = useState<'home' | 'terms' | 'privacy'>(() => {
+    try {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('terms') || hash === '#terms') return 'terms';
+      if (path.includes('privacy') || hash === '#privacy') return 'privacy';
+      return 'home';
+    } catch {
+      return 'home';
     }
   });
 
@@ -31,9 +44,57 @@ export const App: React.FC = () => {
     } catch {}
   }, [darkMode]);
 
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('terms') || hash === '#terms') {
+        setCurrentRoute('terms');
+      } else if (path.includes('privacy') || hash === '#privacy') {
+        setCurrentRoute('privacy');
+      } else {
+        setCurrentRoute('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
+    };
+  }, []);
+
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
+
+  const handleOpenLegal = (tab: 'terms' | 'privacy') => {
+    setCurrentRoute(tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+      window.history.pushState(null, '', tab === 'terms' ? '/terms' : '/privacy');
+    } catch {}
+  };
+
+  const handleBackToHome = () => {
+    setCurrentRoute('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+      window.history.pushState(null, '', '/');
+    } catch {}
+  };
+
+  if (currentRoute === 'terms' || currentRoute === 'privacy') {
+    return (
+      <LegalPage
+        initialTab={currentRoute}
+        onBackToHome={handleBackToHome}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-obsidian-900 text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-200">
@@ -46,7 +107,7 @@ export const App: React.FC = () => {
         <AffiliateShowcase />
         <ContactSection />
       </main>
-      <Footer />
+      <Footer onOpenLegal={handleOpenLegal} />
     </div>
   );
 };
