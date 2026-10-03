@@ -52,9 +52,11 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
             href="#about"
             className="flex items-center gap-3 group focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-lg p-1"
           >
-            <div className="w-10 h-10 rounded-lg bg-emerald-500 text-obsidian-950 font-mono font-bold flex items-center justify-center text-lg shadow-sm group-hover:bg-emerald-400 transition-colors">
-              WA
-            </div>
+            <img
+              src="/logo.svg"
+              alt="Logo Wahid Alimudin"
+              className="w-10 h-10 rounded-lg shadow-sm group-hover:scale-105 transition-transform"
+            />
             <div className="flex flex-col">
               <span className="font-bold text-slate-900 dark:text-white tracking-tight text-base sm:text-lg leading-tight">
                 Wahid Alimudin
