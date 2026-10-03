@@ -14,6 +14,68 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Serial Masalah Manajemen Pesantren & Solusi siakadponpes.com -->
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/bahaya-pembukuan-keuangan-manual-pesantren-solusi-digital</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/mengatasi-tunggakan-spp-santri-dengan-virtual-account</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/solusi-uang-saku-santri-hilang-kartu-cashless-pesantren</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/manajemen-perizinan-santri-digital-mencegah-santri-kabur</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/pantau-hafalan-quran-santri-realtime-buku-tahfidz-digital</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/risiko-dana-bercampur-pesantren-dan-pemisahan-pos-keuangan</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/efisiensi-penilaian-rapor-pesantren-tanpa-lembur-guru</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/membangun-kepercayaan-wali-santri-lewat-portal-informasi-pesantren</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/keterpaduan-data-santri-memudahkan-sinkronisasi-emis-kemenag</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahidalimudin.web.id/blog/panduan-migrasi-manajemen-pesantren-tradisional-ke-modern</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Artikel Tren Teknologi Teratas 2026 -->
   <url>
     <loc>https://wahidalimudin.web.id/blog/kebangkitan-agentic-ai-dan-otonom-workflow-2026</loc>
