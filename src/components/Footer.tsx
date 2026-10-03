@@ -2,9 +2,10 @@ import React from 'react';
 
 interface FooterProps {
   onOpenLegal?: (tab: 'terms' | 'privacy') => void;
+  onOpenBlog?: (slug?: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onOpenBlog }) => {
   return (
     <footer className="bg-slate-100 dark:bg-obsidian-950 text-slate-600 dark:text-slate-400 py-12 border-t border-slate-200 dark:border-obsidian-800 text-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -24,6 +25,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <a href="#mql5" className="hover:text-emerald-600 dark:hover:text-emerald-400">Robot MQL5</a>
             <a href="#tech-stack" className="hover:text-emerald-600 dark:hover:text-emerald-400">Tech Stack</a>
             <a href="#affiliate" className="hover:text-emerald-600 dark:hover:text-emerald-400">Gear Afiliasi</a>
+            <a
+              href="/blog"
+              onClick={(e) => {
+                if (onOpenBlog) {
+                  e.preventDefault();
+                  onOpenBlog();
+                }
+              }}
+              className="hover:text-emerald-600 dark:hover:text-emerald-400 font-semibold text-emerald-600 dark:text-emerald-400"
+            >
+              Blog &amp; Tutorial
+            </a>
             <a href="#contact" className="hover:text-emerald-600 dark:hover:text-emerald-400">Kontak</a>
           </div>
         </div>

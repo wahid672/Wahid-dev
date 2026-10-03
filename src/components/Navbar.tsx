@@ -4,9 +4,10 @@ import { SunIcon, MoonIcon, MenuIcon, CloseIcon } from './Icons';
 interface NavbarProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
+  onOpenBlog?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
+export const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode, onOpenBlog }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -34,6 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
     { label: 'Robot MQL5 MT5', href: '#mql5' },
     { label: 'Tech Stack', href: '#tech-stack' },
     { label: 'Gear & Afiliasi', href: '#affiliate' },
+    { label: 'Blog & Tutorial', href: '/blog' },
     { label: 'Kontak', href: '#contact' }
   ];
 
@@ -73,6 +75,12 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => {
+                  if (link.href === '/blog' && onOpenBlog) {
+                    e.preventDefault();
+                    onOpenBlog();
+                  }
+                }}
                 className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-emerald-600 dark:text-slate-300 dark:hover:text-emerald-400 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
               >
                 {link.label}
@@ -119,7 +127,13 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                if (link.href === '/blog' && onOpenBlog) {
+                  e.preventDefault();
+                  onOpenBlog();
+                }
+              }}
               className="block px-3 py-3 rounded-lg text-base font-medium text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-obsidian-850 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
               {link.label}

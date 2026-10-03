@@ -34,3 +34,26 @@ export interface AffiliateItem {
   specs: string[];
   linkUrl: string;
 }
+
+export interface BlogPostMeta {
+  slug: string;
+  title: string;
+  date: string;
+  formattedDate: string;
+  author: string;
+  category: string;
+  tags: string[];
+  summary: string;
+  readingTime: string;
+}
+
+export interface BlogPost extends BlogPostMeta {
+  content: string;
+}
+
+export interface TocItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
