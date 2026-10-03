@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wahid-dev.pages.dev/sitemap.xml

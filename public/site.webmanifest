@@ -1,0 +1,17 @@
+{
+  "name": "Wahid Alimudin | Software Engineer & MQL5 Algo Developer",
+  "short_name": "Wahid Dev",
+  "description": "Portofolio profesional Wahid Alimudin: Software House, MQL5 MT5 Robot Trading, IoT ESP32 RFID, dan Founder SaaS.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0f17",
+  "theme_color": "#0b0f17",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
