@@ -12,7 +12,9 @@ import {
   CheckIcon,
   WhatsAppIcon,
   TelegramIcon,
-  ExternalLinkIcon
+  ExternalLinkIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from './Icons';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import {
@@ -45,6 +47,8 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
   const [copiedLink, setCopiedLink] = useState(false);
   const [mobileTocOpen, setMobileTocOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const POSTS_PER_PAGE = 10;
 
   // Sync state if initialSlug prop changes from parent router
   useEffect(() => {
@@ -103,6 +107,48 @@ export const BlogPage: React.FC<BlogPageProps> = ({
       return inTitle || inSummary || inTags;
     });
   }, [allPosts, selectedCategory, searchQuery]);
+ 
+  // Reset pagination to page 1 whenever category or search query changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchQuery]);
+
+  // Pagination calculations
+  const totalPosts = filteredPosts.length;
+  const totalPages = Math.max(1, Math.ceil(totalPosts / POSTS_PER_PAGE));
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
+
+  const paginatedPosts = useMemo(() => {
+    const start = (safeCurrentPage - 1) * POSTS_PER_PAGE;
+    return filteredPosts.slice(start, start + POSTS_PER_PAGE);
+  }, [filteredPosts, safeCurrentPage]);
+
+  const startPostIndex = totalPosts === 0 ? 0 : (safeCurrentPage - 1) * POSTS_PER_PAGE + 1;
+  const endPostIndex = Math.min(safeCurrentPage * POSTS_PER_PAGE, totalPosts);
+
+  const pageNumbers = useMemo(() => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    if (safeCurrentPage <= 4) {
+      return [1, 2, 3, 4, 5, '...', totalPages];
+    }
+    if (safeCurrentPage >= totalPages - 3) {
+      return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    }
+    return [1, '...', safeCurrentPage - 1, safeCurrentPage, safeCurrentPage + 1, '...', totalPages];
+  }, [totalPages, safeCurrentPage]);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages || newPage === safeCurrentPage) return;
+    setCurrentPage(newPage);
+    const searchSection = document.getElementById('blog-search');
+    if (searchSection) {
+      searchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   // Handle SEO dynamic updates
   useEffect(() => {
@@ -521,7 +567,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                   <button
                     type="button"
                     onClick={() => setSearchQuery('')}
-                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                    className="absolute inset-y-0 right-0 px-3.5 min-h-[48px] flex items-center text-xs font-medium text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
                   >
                     Hapus
                   </button>
@@ -542,7 +588,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                       key={cat}
                       type="button"
                       onClick={() => setSelectedCategory(cat)}
-                      className={`min-h-[40px] px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+                      className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                         isActive
                           ? 'bg-emerald-600 text-white shadow-sm'
                           : 'bg-slate-100 hover:bg-slate-200 dark:bg-obsidian-800 dark:hover:bg-obsidian-750 text-slate-700 dark:text-slate-300'
@@ -566,56 +612,140 @@ export const BlogPage: React.FC<BlogPageProps> = ({
 
             {/* Articles List / Grid */}
             {filteredPosts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredPosts.map((post) => (
-                  <article
-                    key={post.slug}
-                    onClick={() => handleSelectPost(post.slug)}
-                    className="p-6 rounded-2xl border border-slate-200 dark:border-obsidian-800 bg-white dark:bg-obsidian-850 hover:border-emerald-500/80 dark:hover:border-emerald-500/80 hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between group space-y-4"
-                  >
-                    <div className="space-y-3">
-                      {/* Meta: Category & Date */}
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="px-2.5 py-1 rounded-md font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/80">
-                          {post.category}
-                        </span>
-                        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-mono text-[11px]">
-                          <time dateTime={post.date}>{post.formattedDate}</time>
-                          <span>&bull;</span>
-                          <span>{post.readingTime}</span>
-                        </div>
-                      </div>
-
-                      {/* Title */}
-                      <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
-                        {post.title}
-                      </h2>
-
-                      {/* Excerpt */}
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
-                        {post.summary}
-                      </p>
-                    </div>
-
-                    {/* Footer: Tags & Read Action */}
-                    <div className="pt-4 border-t border-slate-100 dark:border-obsidian-800 flex items-center justify-between">
-                      <div className="flex flex-wrap gap-1.5">
-                        {post.tags.slice(0, 2).map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 rounded text-[11px] bg-slate-100 dark:bg-obsidian-900 text-slate-600 dark:text-slate-400"
-                          >
-                            #{tag}
+              <div className="space-y-8 min-w-0 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-w-0">
+                  {paginatedPosts.map((post) => (
+                    <article
+                      key={post.slug}
+                      onClick={() => handleSelectPost(post.slug)}
+                      className="p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-obsidian-800 bg-white dark:bg-obsidian-850 hover:border-emerald-500/80 dark:hover:border-emerald-500/80 hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between group space-y-4 min-w-0"
+                    >
+                      <div className="space-y-3 min-w-0">
+                        {/* Meta: Category & Date */}
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                          <span className="px-2.5 py-1 rounded-md font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/80">
+                            {post.category}
                           </span>
-                        ))}
+                          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-mono text-[11px]">
+                            <time dateTime={post.date}>{post.formattedDate}</time>
+                            <span>&bull;</span>
+                            <span>{post.readingTime}</span>
+                          </div>
+                        </div>
+
+                        {/* Title */}
+                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug break-words [overflow-wrap:anywhere]">
+                          {post.title}
+                        </h2>
+
+                        {/* Excerpt */}
+                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed break-words [overflow-wrap:anywhere]">
+                          {post.summary}
+                        </p>
                       </div>
 
-                      <span className="min-h-[44px] inline-flex items-center text-xs font-semibold text-emerald-600 dark:text-emerald-400 group-hover:underline">
-                        Baca Selengkapnya &rarr;
-                      </span>
+                      {/* Footer: Tags & Read Action */}
+                      <div className="pt-4 border-t border-slate-100 dark:border-obsidian-800 flex items-center justify-between gap-3">
+                        <div className="flex flex-wrap gap-1.5 min-w-0">
+                          {post.tags.slice(0, 2).map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2 py-0.5 rounded text-[11px] bg-slate-100 dark:bg-obsidian-900 text-slate-600 dark:text-slate-400 truncate max-w-[140px]"
+                            >
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <span className="min-h-[44px] shrink-0 inline-flex items-center text-xs font-semibold text-emerald-600 dark:text-emerald-400 group-hover:underline">
+                          Baca Selengkapnya &rarr;
+                        </span>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <nav
+                    aria-label="Paginasi Artikel Blog"
+                    className="pt-6 sm:pt-8 border-t border-slate-200 dark:border-obsidian-800 flex flex-col sm:flex-row items-center justify-between gap-4"
+                  >
+                    {/* Information Text */}
+                    <p className="text-xs font-mono text-slate-600 dark:text-slate-400 text-center sm:text-left">
+                      Menampilkan <span className="font-semibold text-slate-900 dark:text-white">{startPostIndex}-{endPostIndex}</span> dari{' '}
+                      <span className="font-semibold text-slate-900 dark:text-white">{totalPosts}</span> artikel
+                    </p>
+
+                    {/* Pagination Buttons */}
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      {/* Prev button */}
+                      <button
+                        type="button"
+                        onClick={() => handlePageChange(safeCurrentPage - 1)}
+                        disabled={safeCurrentPage === 1}
+                        aria-label="Ke halaman sebelumnya"
+                        className="min-h-[44px] min-w-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 border transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed border-slate-300 dark:border-obsidian-750 bg-white dark:bg-obsidian-850 hover:bg-slate-100 dark:hover:bg-obsidian-800 text-slate-700 dark:text-slate-300 shadow-sm"
+                      >
+                        <ChevronLeftIcon className="w-4 h-4" />
+                        <span className="hidden sm:inline">Sebelumnya</span>
+                      </button>
+
+                      {/* Mobile compact indicator */}
+                      <div className="sm:hidden px-3.5 min-h-[44px] flex items-center text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-obsidian-850 rounded-xl border border-slate-200 dark:border-obsidian-750">
+                        <span>{safeCurrentPage} / {totalPages}</span>
+                      </div>
+
+                      {/* Desktop numbered buttons */}
+                      <div className="hidden sm:flex items-center gap-1.5">
+                        {pageNumbers.map((page, idx) => {
+                          if (page === '...') {
+                            return (
+                              <span
+                                key={`ellipsis-${idx}`}
+                                className="min-h-[44px] min-w-[36px] flex items-center justify-center text-xs text-slate-400 font-mono select-none"
+                              >
+                                ...
+                              </span>
+                            );
+                          }
+
+                          const pageNum = page as number;
+                          const isActive = pageNum === safeCurrentPage;
+
+                          return (
+                            <button
+                              key={pageNum}
+                              type="button"
+                              onClick={() => handlePageChange(pageNum)}
+                              aria-current={isActive ? 'page' : undefined}
+                              aria-label={`Buka halaman ${pageNum}`}
+                              className={`min-h-[44px] min-w-[44px] px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+                                isActive
+                                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                                  : 'border border-slate-300 dark:border-obsidian-750 bg-white dark:bg-obsidian-850 hover:bg-slate-100 dark:hover:bg-obsidian-800 text-slate-700 dark:text-slate-300'
+                              }`}
+                            >
+                              {pageNum}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Next button */}
+                      <button
+                        type="button"
+                        onClick={() => handlePageChange(safeCurrentPage + 1)}
+                        disabled={safeCurrentPage === totalPages}
+                        aria-label="Ke halaman berikutnya"
+                        className="min-h-[44px] min-w-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 border transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed border-slate-300 dark:border-obsidian-750 bg-white dark:bg-obsidian-850 hover:bg-slate-100 dark:hover:bg-obsidian-800 text-slate-700 dark:text-slate-300 shadow-sm"
+                      >
+                        <span className="hidden sm:inline">Berikutnya</span>
+                        <ChevronRightIcon className="w-4 h-4" />
+                      </button>
                     </div>
-                  </article>
-                ))}
+                  </nav>
+                )}
               </div>
             ) : (
               /* EMPTY STATE (R-27 compliant) */
