@@ -1,9 +1,66 @@
-import React, { useState } from 'react';
-import { CopyIcon, CheckIcon, ExternalLinkIcon } from './Icons';
+import React, { useState, useMemo } from 'react';
+import { CopyIcon, CheckIcon, ExternalLinkIcon, BookOpenIcon, ChevronRightIcon } from './Icons';
+import { BlogPost } from '../types';
+import { createAutoLinkState, tryAutoLinkPlainText, AutoLinkState } from '../blog/autoLinkService';
 
 interface MarkdownRendererProps {
   content: string;
+  currentSlug?: string;
+  relatedPost?: BlogPost;
+  onNavigatePost?: (slug: string) => void;
 }
+
+// Subkomponen Kartu Rekomendasi Terkait di Tengah Artikel (Baca Juga)
+const MidArticleCard: React.FC<{ post: BlogPost; onNavigate?: (slug: string) => void }> = ({
+  post,
+  onNavigate
+}) => {
+  return (
+    <aside
+      aria-label="Artikel rekomendasi terkait"
+      className="my-8 p-4 sm:p-5 rounded-2xl border border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-50/60 dark:bg-emerald-950/20 shadow-sm transition-all hover:border-emerald-500/60 group not-prose"
+    >
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="space-y-1.5 min-w-0">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider font-mono">
+            <BookOpenIcon className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+            <span>Baca Juga</span>
+          </div>
+          <h4
+            onClick={() => onNavigate && onNavigate(post.slug)}
+            className={`text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-snug line-clamp-2 ${
+              onNavigate ? 'cursor-pointer hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors' : ''
+            }`}
+          >
+            {post.title}
+          </h4>
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-mono text-[11px]">
+            <span className="px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-sans font-medium text-[10px]">
+              {post.category}
+            </span>
+            <span>&bull;</span>
+            <span>{post.readingTime}</span>
+          </div>
+        </div>
+
+        <a
+          href={`/blog/${post.slug}`}
+          onClick={(e) => {
+            if (onNavigate) {
+              e.preventDefault();
+              onNavigate(post.slug);
+            }
+          }}
+          aria-label={`Baca artikel: ${post.title}`}
+          className="self-start sm:self-center shrink-0 min-h-[36px] px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm flex items-center gap-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
+        >
+          <span>Baca Artikel</span>
+          <ChevronRightIcon className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </aside>
+  );
+};
 
 // Subcomponent for Code Block with Copy Button
 const CodeBlock: React.FC<{ language: string; code: string }> = ({ language, code }) => {
@@ -56,11 +113,16 @@ const CodeBlock: React.FC<{ language: string; code: string }> = ({ language, cod
   );
 };
 
-// Render inline formatting: code, bold, italic, links
-function renderInlineFormatting(text: string): React.ReactNode[] {
+// Render inline formatting: code, bold, italic, links, and contextual auto-links
+function renderInlineFormatting(
+  text: string,
+  autoLinkState?: AutoLinkState,
+  onNavigatePost?: (slug: string) => void
+): React.ReactNode[] {
   // Regex to match inline elements: `code`, **bold**, *italic*, [text](url)
   const regex = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g;
   const parts = text.split(regex);
+  let paragraphHasAutoLinked = false;
 
   return parts.map((part, index) => {
     if (!part) return null;
@@ -101,11 +163,23 @@ function renderInlineFormatting(text: string): React.ReactNode[] {
       const linkText = linkMatch[1];
       const linkHref = linkMatch[2];
       const isExternal = linkHref.startsWith('http://') || linkHref.startsWith('https://');
+      const isInternalBlog = !isExternal && (linkHref.startsWith('/blog/') || linkHref.startsWith('#blog/'));
+
+      const handleLinkClick = (e: React.MouseEvent) => {
+        if (isInternalBlog && onNavigatePost) {
+          e.preventDefault();
+          const slug = linkHref.replace(/^(\/blog\/|#blog\/)/, '').split('/')[0].split('#')[0];
+          if (slug) {
+            onNavigatePost(slug);
+          }
+        }
+      };
 
       return (
         <a
           key={index}
           href={linkHref}
+          onClick={handleLinkClick}
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
           className="inline-flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-2 font-medium break-words [overflow-wrap:anywhere]"
@@ -116,14 +190,85 @@ function renderInlineFormatting(text: string): React.ReactNode[] {
       );
     }
 
+    // Plain Text: Cek apakah bisa dilakukan in-text contextual auto-linking
+    if (autoLinkState && !paragraphHasAutoLinked && autoLinkState.totalLinksCount < autoLinkState.maxLinks) {
+      const autoResult = tryAutoLinkPlainText(part, autoLinkState);
+      if (autoResult.hasLinked) {
+        paragraphHasAutoLinked = true;
+        return (
+          <React.Fragment key={index}>
+            {autoResult.nodes.map((node, nodeIdx) => {
+              if (typeof node === 'string') {
+                return node;
+              }
+              return (
+                <a
+                  key={`auto-${nodeIdx}`}
+                  href={`/blog/${node.slug}`}
+                  onClick={(e) => {
+                    if (onNavigatePost) {
+                      e.preventDefault();
+                      onNavigatePost(node.slug);
+                    }
+                  }}
+                  className="inline-flex items-center text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-2 font-medium"
+                  title={`Baca artikel terkait: ${node.keyword}`}
+                >
+                  {node.keyword}
+                </a>
+              );
+            })}
+          </React.Fragment>
+        );
+      }
+    }
+
     return <React.Fragment key={index}>{part}</React.Fragment>;
   });
 }
 
-export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
+  content,
+  currentSlug,
+  relatedPost,
+  onNavigatePost
+}) => {
   const elements: React.ReactNode[] = [];
   const lines = content.split('\n');
 
+  // Siapkan state auto-linking untuk teks artikel (maksimal 3 tautan per artikel)
+  const autoLinkState = useMemo(() => createAutoLinkState(currentSlug, 3), [currentSlug]);
+
+  // Hitung total paragraf biasa untuk menentukan posisi kartu Baca Juga di tengah artikel
+  const paragraphCount = useMemo(() => {
+    let count = 0;
+    let inCode = false;
+    for (const l of lines) {
+      const t = l.trim();
+      if (t.startsWith('```')) {
+        inCode = !inCode;
+        continue;
+      }
+      if (inCode) continue;
+      if (
+        t !== '' &&
+        !t.startsWith('#') &&
+        !t.startsWith('>') &&
+        !t.startsWith('|') &&
+        !t.startsWith('- ') &&
+        !t.startsWith('* ') &&
+        !/^\d+\.\s/.test(t)
+      ) {
+        count++;
+      }
+    }
+    return count;
+  }, [lines]);
+
+  // Titik tengah: sisipkan setelah paragraf ke-Math.floor(paragraphCount / 2), minimal setelah paragraf ke-2 atau ke-3
+  const midPointIndex = paragraphCount >= 4 ? Math.max(2, Math.floor(paragraphCount / 2)) : -1;
+
+  let paragraphIndex = 0;
   let i = 0;
   let elementKey = 0;
 
@@ -357,14 +502,26 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
     }
 
     // 12. Standard Paragraph
+    paragraphIndex++;
     elements.push(
       <p
         key={elementKey++}
         className="my-4 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed break-words [overflow-wrap:anywhere] min-w-0"
       >
-        {renderInlineFormatting(line)}
+        {renderInlineFormatting(line, autoLinkState, onNavigatePost)}
       </p>
     );
+
+    // Sisipkan kartu rekomendasi terkait di titik tengah artikel jika tersedia
+    if (relatedPost && paragraphIndex === midPointIndex) {
+      elements.push(
+        <MidArticleCard
+          key={`mid-article-${elementKey++}`}
+          post={relatedPost}
+          onNavigate={onNavigatePost}
+        />
+      );
+    }
     i++;
   }
 

@@ -402,7 +402,12 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 min-w-0 w-full">
               {/* Main Markdown Body */}
               <div className="lg:col-span-3 min-w-0 w-full">
-                <MarkdownRenderer content={currentPost.content} />
+                <MarkdownRenderer
+                  content={currentPost.content}
+                  currentSlug={currentPost.slug}
+                  relatedPost={relatedPosts[0]}
+                  onNavigatePost={handleSelectPost}
+                />
 
                 {/* Article Tags */}
                 <div className="pt-8 mt-10 border-t border-slate-200 dark:border-obsidian-800 space-y-3">
