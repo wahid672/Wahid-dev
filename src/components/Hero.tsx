@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CheckIcon } from './Icons';
+
+const TYPING_ROLES = [
+  'Fullstack Software Engineer',
+  'MQL5 Algorithmic Developer',
+  'IoT & Embedded Systems Engineer',
+  'SaaS Platform Founder',
+];
 
 export const Hero: React.FC = () => {
   // Interactive MQL5 Terminal Simulator state
@@ -8,6 +15,60 @@ export const Hero: React.FC = () => {
   const [balance] = useState<number>(10000);
   const [tickCount, setTickCount] = useState<number>(142);
   const [simulatedProfit, setSimulatedProfit] = useState<number>(185.50);
+
+  // Typewriter animation state for hero subtitle
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleMotionChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleMotionChange);
+    return () => mediaQuery.removeEventListener('change', handleMotionChange);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    const currentTarget = TYPING_ROLES[roleIndex];
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting) {
+      if (displayText.length < currentTarget.length) {
+        // Typing speed: 80ms per character
+        timer = setTimeout(() => {
+          setDisplayText(currentTarget.slice(0, displayText.length + 1));
+        }, 80);
+      } else {
+        // Pause at completion of role: 2000ms
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2000);
+      }
+    } else {
+      if (displayText.length > 0) {
+        // Deleting speed: 40ms per character
+        timer = setTimeout(() => {
+          setDisplayText(currentTarget.slice(0, displayText.length - 1));
+        }, 40);
+      } else {
+        // Pause after deleting before typing next role: 350ms
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % TYPING_ROLES.length);
+        }, 350);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, roleIndex, prefersReducedMotion]);
 
   // Dynamic lot size based on 1% risk of $10,000 balance with 50 pip stop loss
   const calculatedLot = ((balance * (riskPercent / 100)) / 500).toFixed(2);
@@ -34,9 +95,26 @@ export const Hero: React.FC = () => {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
                 Wahid Alimudin
               </h1>
-              <p className="text-lg sm:text-xl font-medium text-emerald-600 dark:text-emerald-400">
-                Fullstack Software Engineer &amp; MQL5 Algorithmic Developer
-              </p>
+              <div className="min-h-[1.75rem] sm:min-h-[2rem] flex items-center">
+                <p className="text-lg sm:text-xl font-medium text-emerald-600 dark:text-emerald-400">
+                  <span className="sr-only">
+                    Fullstack Software Engineer, MQL5 Algorithmic Developer, IoT &amp; Embedded Systems Engineer, SaaS Platform Founder
+                  </span>
+                  <span aria-hidden="true" className="inline-flex items-center">
+                    {prefersReducedMotion ? (
+                      'Fullstack Software Engineer & MQL5 Algorithmic Developer'
+                    ) : (
+                      <>
+                        <span>{displayText}</span>
+                        <span
+                          className="inline-block w-[2px] h-[1.15em] ml-1 bg-emerald-500 dark:bg-emerald-400 animate-pulse align-middle"
+                          aria-hidden="true"
+                        />
+                      </>
+                    )}
+                  </span>
+                </p>
+              </div>
             </div>
 
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
