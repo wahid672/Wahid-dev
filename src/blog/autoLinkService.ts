@@ -46,6 +46,9 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'PN532', slug: 'perbedaan-sensor-rfid-rc522-dan-pn532-nfc' },
   { keyword: 'RC522', slug: 'perbedaan-sensor-rfid-rc522-dan-pn532-nfc' },
   { keyword: 'ESP32', slug: 'integrasi-esp32-rfid-rc522-dashboard-web' },
+  { keyword: 'Broker MQTT', slug: 'panduan-lengkap-mqtt-instalasi-broker-docker-vps-esp32' },
+  { keyword: 'Mosquitto', slug: 'panduan-lengkap-mqtt-instalasi-broker-docker-vps-esp32' },
+  { keyword: 'QoS', slug: 'panduan-lengkap-mqtt-instalasi-broker-docker-vps-esp32' },
   { keyword: 'MQTT', slug: 'komunikasi-mqtt-esp32-broker-cloud-iot' },
 
   // Web Engineering, Cloud & Database
