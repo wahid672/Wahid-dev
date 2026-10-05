@@ -85,7 +85,19 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'Gaji Dolar', slug: 'cara-menerima-gaji-dolar-rekening-bank-indonesia-wise-payoneer' },
   { keyword: 'Mistplay', slug: 'cara-kerja-mistplay-dan-ekosistem-reward-game-android' },
   { keyword: 'LinkedIn', slug: 'cara-optimasi-profil-linkedin-recruiter-asing-klien-dolar' },
-  { keyword: 'Wise', slug: 'cara-menerima-gaji-dolar-rekening-bank-indonesia-wise-payoneer' }
+  { keyword: 'Wise', slug: 'cara-menerima-gaji-dolar-rekening-bank-indonesia-wise-payoneer' },
+
+  // Rekomendasi Laptop & Hardware Kuliah
+  { keyword: 'Laptop Gaming Under 10 Juta', slug: 'laptop-gaming-under-10-juta-untuk-kuliah' },
+  { keyword: 'Laptop Kuliah Under 10 Juta', slug: 'rekomendasi-laptop-terbaik-untuk-kuliah-under-10-juta' },
+  { keyword: 'Laptop Coding Mahasiswa', slug: 'laptop-coding-mahasiswa-teknik-informatika-under-10-juta' },
+  { keyword: 'Laptop Tipis dan Ringan', slug: 'laptop-kuliah-tipis-ringan-baterai-awet-under-10-juta' },
+  { keyword: 'Laptop Desain Grafis', slug: 'laptop-desain-grafis-dkv-mahasiswa-under-10-juta' },
+  { keyword: 'Laptop Kuliah 5 Jutaan', slug: 'rekomendasi-laptop-kuliah-harga-5-jutaan-terbaik' },
+  { keyword: 'Laptop Kuliah 7 Jutaan', slug: 'rekomendasi-laptop-kuliah-7-jutaan-paling-worth-it' },
+  { keyword: 'Spek Laptop Mahasiswa', slug: 'panduan-spesifikasi-laptop-mahasiswa-awet-sampai-lulus' },
+  { keyword: 'Laptop Brand Lokal', slug: 'laptop-brand-lokal-vs-global-under-10-juta-mahasiswa' },
+  { keyword: 'Beli Laptop Kuliah', slug: 'tips-beli-laptop-kuliah-under-10-juta-bebas-zonk' }
 ];
 
 export const KEYWORD_LINKS: KeywordLinkItem[] = [...RAW_KEYWORD_LINKS].sort(
