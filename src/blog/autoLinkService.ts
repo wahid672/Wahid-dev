@@ -170,6 +170,25 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'Macadam', slug: 'cara-kerja-sweatcoin-dan-macadam-aplikasi-jalan-kaki-penghasil-reward' },
   { keyword: 'Aplikasi Penghasil Uang Scam', slug: 'ciri-ciri-aplikasi-penghasil-uang-scam-dan-cara-menghindarinya' },
 
+  // Edukasi Finansial, Forex & Trading
+  { keyword: 'Manajemen Risiko Trading', slug: 'kunci-sukses-trading-forex-dan-xauusd-manajemen-risiko-1-persen' },
+  { keyword: 'Volatilitas Emas', slug: 'karakteristik-trading-xauusd-emas-dan-trik-menaklukkan-volatilitas' },
+  { keyword: 'XAUUSD', slug: 'karakteristik-trading-xauusd-emas-dan-trik-menaklukkan-volatilitas' },
+  { keyword: 'Pair Forex Pemula', slug: 'daftar-pair-forex-paling-gampang-dianalisis-untuk-pemula' },
+  { keyword: 'EURUSD', slug: 'rahasia-trading-eurusd-pair-paling-likuid-di-dunia' },
+  { keyword: 'Smart Money Concepts', slug: 'strategi-price-action-snr-dan-smc-pada-xauusd' },
+  { keyword: 'SMC XAUUSD', slug: 'strategi-price-action-snr-dan-smc-pada-xauusd' },
+  { keyword: 'London New York Overlap', slug: 'panduan-jam-trading-forex-dan-xauusd-sesi-london-new-york-overlap' },
+  { keyword: 'Jam Trading Forex', slug: 'panduan-jam-trading-forex-dan-xauusd-sesi-london-new-york-overlap' },
+  { keyword: 'Berita NFP Forex', slug: 'cara-menyikapi-berita-fundamental-nfp-cpi-fomc-pada-forex-dan-emas' },
+  { keyword: 'Psikologi Trading', slug: 'psikologi-trading-mengatasi-fomo-revenge-trading-dan-serakah' },
+  { keyword: 'Revenge Trading', slug: 'psikologi-trading-mengatasi-fomo-revenge-trading-dan-serakah' },
+  { keyword: 'GBPUSD Breakout', slug: 'strategi-trading-gbpusd-karakter-pergerakan-dan-pola-breakout' },
+  { keyword: 'The Cable', slug: 'strategi-trading-gbpusd-karakter-pergerakan-dan-pola-breakout' },
+  { keyword: 'Prop Firm Forex', slug: 'roadmap-konsisten-profit-forex-dan-xauusd-dari-akun-demo-ke-proptrim' },
+  { keyword: 'Evaluasi Prop Firm', slug: 'roadmap-konsisten-profit-forex-dan-xauusd-dari-akun-demo-ke-proptrim' },
+  { keyword: 'Trading Forex', slug: 'kunci-sukses-trading-forex-dan-xauusd-manajemen-risiko-1-persen' },
+
   // Rekomendasi Laptop & Hardware Kuliah
   { keyword: 'Laptop Gaming Under 10 Juta', slug: 'laptop-gaming-under-10-juta-untuk-kuliah' },
   { keyword: 'Laptop Kuliah Under 10 Juta', slug: 'rekomendasi-laptop-terbaik-untuk-kuliah-under-10-juta' },
