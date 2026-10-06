@@ -95,6 +95,19 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'Privasi PII', slug: 'kebocoran-data-pii-dan-sesi-autentikasi-rapuh-vibe-coding' },
   { keyword: 'Automated Testing', slug: 'ketiadaan-automated-testing-dan-regresi-fitur-vibe-coder' },
 
+  // Web3, Blockchain & Pembayaran Digital
+  { keyword: 'Stablecoin', slug: 'revolusi-stablecoin-metode-pembayaran-global-stripe-bridge-visa' },
+  { keyword: 'Account Abstraction', slug: 'account-abstraction-erc-4337-masa-depan-dompet-web3-tanpa-seed-phrase' },
+  { keyword: 'ERC-4337', slug: 'account-abstraction-erc-4337-masa-depan-dompet-web3-tanpa-seed-phrase' },
+  { keyword: 'Solana Pay', slug: 'solana-pay-dan-era-mikrotransaksi-biaya-nol-pada-kasir-merchant' },
+  { keyword: 'Agen AI', slug: 'otomasi-pembayaran-agen-ai-dan-ekonomi-machine-to-machine-web3' },
+  { keyword: 'Project Agora', slug: 'proyek-agora-bis-dan-deposito-tertokenisasi-masa-depan-perbankan' },
+  { keyword: 'Yield-Bearing Stablecoin', slug: 'rwa-dan-yield-bearing-stablecoins-uang-kas-yang-menghasilkan-bunga' },
+  { keyword: 'Zero-Knowledge Proof', slug: 'pembayaran-privat-terlindungi-zero-knowledge-proof-untuk-bisnis-b2b' },
+  { keyword: 'Remitansi Global', slug: 'revolusi-remitansi-lintas-negara-mengirim-uang-antar-benua-dalam-hitungan-detik' },
+  { keyword: 'Regulasi MiCA', slug: 'regulasi-mica-dan-standar-kepatuhan-global-pembayaran-kripto' },
+  { keyword: 'QRIS Kripto', slug: 'interoperabilitas-qris-dan-kripto-peta-jalan-kasir-indonesia-di-era-web3' },
+
   // Video Iklan, Creator & Affiliate
   { keyword: 'Shopee Affiliate', slug: 'trik-bikin-video-iklan-shopee-affiliate-otomatis-dari-link-produk' },
   { keyword: 'Shopee Video', slug: 'strategi-shopee-video-fyp-algoritma-komisi-ratusan-juta' },
