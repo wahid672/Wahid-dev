@@ -40,6 +40,7 @@ function parseFrontmatterAndContent(raw: string, filename: string): BlogPost {
   let tags: string[] = [];
   let summary = '';
   let readingTime = '';
+  let image = '';
   let content = raw;
 
   if (raw.startsWith('---')) {
@@ -83,6 +84,9 @@ function parseFrontmatterAndContent(raw: string, filename: string): BlogPost {
           case 'readingTime':
             readingTime = val;
             break;
+          case 'image':
+            image = val;
+            break;
           case 'tags':
             if (val.startsWith('[') && val.endsWith(']')) {
               tags = val
@@ -114,6 +118,7 @@ function parseFrontmatterAndContent(raw: string, filename: string): BlogPost {
     tags,
     summary,
     readingTime,
+    image: image || undefined,
     content
   };
 }

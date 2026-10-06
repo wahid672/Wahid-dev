@@ -7,6 +7,7 @@ category: "Bisnis Digital"
 tags: ["Shopee Affiliate", "Shopee Video", "FYP Shopee", "Komisi Ratusan Juta", "Konten Viral", "Keranjang Oranye"]
 summary: "Bedah tuntas cara kerja algoritma Shopee Video, teknik hook 3 detik penahan retensi penonton, serta trik mengonversi tayangan video menjadi klik keranjang oranye bernilai ratusan juta rupiah."
 readingTime: "9 menit baca"
+image: "/images/blog/strategi-shopee-video-fyp-algoritma-komisi-ratusan-juta.jpg"
 ---
 
 Dalam ekosistem Shopee Affiliate saat ini, fitur **Shopee Video** telah bertransformasi menjadi mesin pencetak komisi paling eksponensial. Berbeda dengan platform media sosial murni di mana pengguna datang hanya untuk mencari hiburan, para pengguna yang membuka Shopee Video sudah memiliki **niat membeli (buying intent)** yang sangat tinggi. Mereka siap mengeluarkan uang begitu melihat produk yang menarik dan memiliki ulasan meyakinkan.

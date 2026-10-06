@@ -360,6 +360,18 @@ export const BlogPage: React.FC<BlogPageProps> = ({
               </div>
             </header>
 
+            {/* Featured Post Cover Banner */}
+            {currentPost.image && (
+              <div className="rounded-xl overflow-hidden border border-slate-200 dark:border-obsidian-800 shadow-sm bg-slate-900">
+                <img
+                  src={currentPost.image}
+                  alt={currentPost.title}
+                  className="w-full h-auto object-cover max-h-[440px]"
+                  loading="eager"
+                />
+              </div>
+            )}
+
             {/* Table of Contents for Mobile View (Collapsible) */}
             {tableOfContents.length > 0 && (
               <div className="lg:hidden p-4 rounded-xl border border-slate-200 dark:border-obsidian-800 bg-white dark:bg-obsidian-850 shadow-sm">

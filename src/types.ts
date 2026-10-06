@@ -45,6 +45,7 @@ export interface BlogPostMeta {
   tags: string[];
   summary: string;
   readingTime: string;
+  image?: string;
 }
 
 export interface BlogPost extends BlogPostMeta {

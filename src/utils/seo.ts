@@ -6,6 +6,10 @@ interface SeoConfig {
   url: string;
   keywords?: string[];
   type?: 'website' | 'article';
+  image?: string;
+  imageWidth?: string;
+  imageHeight?: string;
+  imageType?: string;
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
@@ -45,6 +49,10 @@ export function updateSeo({
   url,
   keywords,
   type = 'website',
+  image,
+  imageWidth = '1200',
+  imageHeight = '630',
+  imageType = 'image/jpeg',
   publishedTime,
   modifiedTime,
   author = 'Wahid Alimudin',
@@ -52,6 +60,11 @@ export function updateSeo({
   tags,
   jsonLd
 }: SeoConfig) {
+  const baseUrl = 'https://wahidalimudin.web.id';
+  const resolvedImage = image
+    ? (image.startsWith('http') ? image : `${baseUrl}${image.startsWith('/') ? '' : '/'}${image}`)
+    : `${baseUrl}/og-image.jpg`;
+
   // 1. Update Title
   document.title = title;
 
@@ -63,11 +76,17 @@ export function updateSeo({
   }
   updateMetaTag('link[rel="canonical"]', 'href', url);
 
-  // 3. Open Graph
+  // 3. Open Graph (Facebook / WhatsApp / Telegram / LinkedIn)
   updateMetaTag('meta[property="og:title"]', 'content', title);
   updateMetaTag('meta[property="og:description"]', 'content', description);
   updateMetaTag('meta[property="og:url"]', 'content', url);
   updateMetaTag('meta[property="og:type"]', 'content', type);
+  updateMetaTag('meta[property="og:site_name"]', 'content', 'Wahid Alimudin');
+  updateMetaTag('meta[property="og:locale"]', 'content', 'id_ID');
+  updateMetaTag('meta[property="og:image"]', 'content', resolvedImage);
+  updateMetaTag('meta[property="og:image:width"]', 'content', imageWidth);
+  updateMetaTag('meta[property="og:image:height"]', 'content', imageHeight);
+  updateMetaTag('meta[property="og:image:type"]', 'content', imageType);
 
   if (type === 'article') {
     if (publishedTime) {
@@ -83,15 +102,16 @@ export function updateSeo({
       updateMetaTag('meta[property="article:section"]', 'content', section);
     }
     if (tags && tags.length > 0) {
-      // Set first tag in og:tag
       updateMetaTag('meta[property="article:tag"]', 'content', tags[0]);
     }
   }
 
   // 4. Twitter Cards
+  updateMetaTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
   updateMetaTag('meta[name="twitter:title"]', 'content', title);
   updateMetaTag('meta[name="twitter:description"]', 'content', description);
   updateMetaTag('meta[name="twitter:url"]', 'content', url);
+  updateMetaTag('meta[name="twitter:image"]', 'content', resolvedImage);
 
   // 5. Schema.org JSON-LD
   let script = document.getElementById('dynamic-seo-jsonld') as HTMLScriptElement | null;
@@ -184,6 +204,9 @@ export function setBlogPostSeo(post: BlogPost) {
   const baseUrl = 'https://wahidalimudin.web.id';
   const postUrl = `${baseUrl}/blog/${post.slug}`;
   const blogUrl = `${baseUrl}/blog`;
+  const postImageUrl = post.image
+    ? (post.image.startsWith('http') ? post.image : `${baseUrl}${post.image.startsWith('/') ? '' : '/'}${post.image}`)
+    : `${baseUrl}/og-image.jpg`;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -222,6 +245,7 @@ export function setBlogPostSeo(post: BlogPost) {
         headline: post.title,
         description: post.summary,
         url: postUrl,
+        image: postImageUrl,
         datePublished: post.date,
         dateModified: post.date,
         articleSection: post.category,
@@ -246,6 +270,7 @@ export function setBlogPostSeo(post: BlogPost) {
     title: `${post.title} | Wahid Alimudin`,
     description: post.summary,
     url: postUrl,
+    image: postImageUrl,
     keywords: post.tags,
     type: 'article',
     publishedTime: post.date,
@@ -265,6 +290,7 @@ export function resetHomeSeo() {
     title: 'Wahid Alimudin | Software Engineer & MQL5 Algo Developer',
     description: 'Portofolio profesional Wahid Alimudin: Fullstack Software Engineer, Developer Robot Trading MQL5 MetaTrader 5, Sistem Presensi IoT ESP32 RFID, dan Founder 5 platform SaaS aktif.',
     url: baseUrl,
+    image: `${baseUrl}/og-image.jpg`,
     keywords: [
       'Wahid Alimudin',
       'developer software indonesia',
