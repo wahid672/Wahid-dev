@@ -81,6 +81,20 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'Ollama', slug: 'tutorial-setup-ollama-local-llm-coding-offline' },
   { keyword: 'Termux', slug: 'cara-instal-antigravity-cli-termux-android-ai' },
 
+  // Rekayasa Perangkat Lunak & Vibe Coding
+  { keyword: 'Vibe Coding', slug: 'bahaya-keamanan-dan-celah-idor-aplikasi-vibe-coding' },
+  { keyword: 'Celah IDOR', slug: 'bahaya-keamanan-dan-celah-idor-aplikasi-vibe-coding' },
+  { keyword: 'N+1 Query', slug: 'masalah-n-plus-1-dan-ketiadaan-indeks-database-vibe-coder' },
+  { keyword: 'Indeks Database', slug: 'masalah-n-plus-1-dan-ketiadaan-indeks-database-vibe-coder' },
+  { keyword: 'Memory Leak', slug: 'bom-waktu-memory-leak-dan-re-render-react-vibe-coder' },
+  { keyword: 'Happy Path', slug: 'sindrom-happy-path-dan-ketiadaan-resiliensi-error-vibe-coding' },
+  { keyword: 'Rate Limiting', slug: 'ancaman-tagihan-bengkak-api-dan-ketiadaan-rate-limiting-vibe-coder' },
+  { keyword: 'Zombie Code', slug: 'zombie-code-dan-ketergantungan-paket-liar-aplikasi-vibe-coding' },
+  { keyword: 'Arsitektur Caching', slug: 'kejutan-tagihan-cloud-dan-ketiadaan-arsitektur-caching-vibe-coder' },
+  { keyword: 'Structured Logging', slug: 'kebutaan-observabilitas-dan-ketiadaan-logging-terstruktur-vibe-coder' },
+  { keyword: 'Privasi PII', slug: 'kebocoran-data-pii-dan-sesi-autentikasi-rapuh-vibe-coding' },
+  { keyword: 'Automated Testing', slug: 'ketiadaan-automated-testing-dan-regresi-fitur-vibe-coder' },
+
   // Video Iklan, Creator & Affiliate
   { keyword: 'Shopee Affiliate', slug: 'trik-bikin-video-iklan-shopee-affiliate-otomatis-dari-link-produk' },
   { keyword: 'Shopee Video', slug: 'strategi-shopee-video-fyp-algoritma-komisi-ratusan-juta' },
