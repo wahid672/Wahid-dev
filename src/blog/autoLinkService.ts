@@ -83,6 +83,17 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
 
   // Video Iklan, Creator & Affiliate
   { keyword: 'Shopee Affiliate', slug: 'trik-bikin-video-iklan-shopee-affiliate-otomatis-dari-link-produk' },
+  { keyword: 'Shopee Video', slug: 'strategi-shopee-video-fyp-algoritma-komisi-ratusan-juta' },
+  { keyword: 'Komisi XTRA', slug: 'cara-maksimalkan-komisi-xtra-shopee-affiliate-hingga-20-persen' },
+  { keyword: 'Shopee Live', slug: 'trik-shopee-live-konversi-tinggi-affiliate-omzet-ratusan-juta' },
+  { keyword: 'Multi-Channel Funnel', slug: 'strategi-multi-channel-funnel-tiktok-instagram-ke-shopee-affiliate' },
+  { keyword: 'Racun Shopee', slug: 'cara-membangun-komunitas-telegram-dan-whatsapp-racun-shopee-cuan' },
+  { keyword: 'Sampel Gratis Shopee', slug: 'rahasia-mendapatkan-sampel-gratis-dan-direct-deal-seller-shopee' },
+  { keyword: 'Direct Deal', slug: 'rahasia-mendapatkan-sampel-gratis-dan-direct-deal-seller-shopee' },
+  { keyword: 'Produk Winning Shopee', slug: 'cara-riset-produk-winning-shopee-affiliate-tren-dan-margin-tinggi' },
+  { keyword: 'Banned Shopee Affiliate', slug: 'panduan-aman-shopee-affiliate-bebas-banned-dan-pelanggaran-hak-cipta' },
+  { keyword: 'Scale Up Affiliate', slug: 'strategi-scale-up-shopee-affiliate-bangun-tim-dan-otomasi-konten' },
+  { keyword: 'Pajak Shopee Affiliate', slug: 'manajemen-keuangan-dan-pajak-shopee-affiliate-pph-21-dan-cashflow' },
   { keyword: 'TikTok Affiliate', slug: 'panduan-membuat-video-iklan-ai-ugc-tiktok-affiliate-cuan' },
   { keyword: 'Faceless Channel', slug: 'rahasia-video-iklan-faceless-channel-monetisasi-global' },
   { keyword: 'Video Iklan AI', slug: 'panduan-membuat-video-iklan-ai-ugc-tiktok-affiliate-cuan' },
