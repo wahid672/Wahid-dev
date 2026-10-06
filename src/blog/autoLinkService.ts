@@ -144,6 +144,19 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'LinkedIn', slug: 'cara-optimasi-profil-linkedin-recruiter-asing-klien-dolar' },
   { keyword: 'Wise', slug: 'cara-menerima-gaji-dolar-rekening-bank-indonesia-wise-payoneer' },
 
+  // Aplikasi Android Penghasil Uang & Reward Legit
+  { keyword: 'Google Opinion Rewards', slug: 'panduan-google-opinion-rewards-penghasil-saldo-resmi-google' },
+  { keyword: 'Rakuten Insight', slug: 'trik-cuan-survei-rakuten-insight-cairkan-saldo-dana-gopay' },
+  { keyword: 'Premise Data', slug: 'panduan-premise-data-aplikasi-tugas-lapangan-dibayar-rupiah' },
+  { keyword: 'AttaPoll', slug: 'cara-menghasilkan-uang-dari-attapoll-survei-global-payout-rendah' },
+  { keyword: 'Snapcart', slug: 'trik-snapcart-ubah-struk-belanja-supermarket-jadi-uang-tunai' },
+  { keyword: 'Toloka', slug: 'panduan-toloka-yandex-microtask-anotasi-data-ai-dibayar-dolar' },
+  { keyword: 'Foap', slug: 'cara-jual-foto-kamera-hp-di-foap-dan-menghasilkan-dolar-nyata' },
+  { keyword: 'YouGov', slug: 'panduan-yougov-indonesia-survei-opini-publik-tukar-saldo-tunai' },
+  { keyword: 'Sweatcoin', slug: 'cara-kerja-sweatcoin-dan-macadam-aplikasi-jalan-kaki-penghasil-reward' },
+  { keyword: 'Macadam', slug: 'cara-kerja-sweatcoin-dan-macadam-aplikasi-jalan-kaki-penghasil-reward' },
+  { keyword: 'Aplikasi Penghasil Uang Scam', slug: 'ciri-ciri-aplikasi-penghasil-uang-scam-dan-cara-menghindarinya' },
+
   // Rekomendasi Laptop & Hardware Kuliah
   { keyword: 'Laptop Gaming Under 10 Juta', slug: 'laptop-gaming-under-10-juta-untuk-kuliah' },
   { keyword: 'Laptop Kuliah Under 10 Juta', slug: 'rekomendasi-laptop-terbaik-untuk-kuliah-under-10-juta' },
