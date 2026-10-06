@@ -85,6 +85,8 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'TikTok Affiliate', slug: 'panduan-membuat-video-iklan-ai-ugc-tiktok-affiliate-cuan' },
   { keyword: 'Faceless Channel', slug: 'rahasia-video-iklan-faceless-channel-monetisasi-global' },
   { keyword: 'Video Iklan AI', slug: 'panduan-membuat-video-iklan-ai-ugc-tiktok-affiliate-cuan' },
+  { keyword: 'Remotion', slug: 'tutorial-lengkap-remotion-video-editing-react-pemula-a-sampai-z' },
+  { keyword: 'Renotion', slug: 'tutorial-lengkap-remotion-video-editing-react-pemula-a-sampai-z' },
   { keyword: 'CapCut', slug: 'cara-menghasilkan-uang-dari-hp-kreator-template-capcut' },
   { keyword: 'Canva', slug: 'cara-jual-template-canva-produk-digital-lewat-hp' },
 
