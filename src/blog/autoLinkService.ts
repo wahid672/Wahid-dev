@@ -95,6 +95,26 @@ export const RAW_KEYWORD_LINKS: KeywordLinkItem[] = [
   { keyword: 'Privasi PII', slug: 'kebocoran-data-pii-dan-sesi-autentikasi-rapuh-vibe-coding' },
   { keyword: 'Automated Testing', slug: 'ketiadaan-automated-testing-dan-regresi-fitur-vibe-coder' },
 
+  // AI App Builder, Prompting & Vibe Coding Hacks
+  { keyword: 'God-Prompt', slug: 'god-prompt-framework-struktur-prompt-ai-app-builder' },
+  { keyword: 'AI App Builder', slug: 'god-prompt-framework-struktur-prompt-ai-app-builder' },
+  { keyword: 'PRD AI', slug: 'hack-prd-first-alur-dokumen-persyaratan-ai-builder' },
+  { keyword: 'Claude 3.5 Sonnet', slug: 'hack-prd-first-alur-dokumen-persyaratan-ai-builder' },
+  { keyword: 'Database Schema AI', slug: 'database-schema-first-hack-supabase-postgresql-ai-builder' },
+  { keyword: 'Supabase AI Builder', slug: 'database-schema-first-hack-supabase-postgresql-ai-builder' },
+  { keyword: 'Context Rot', slug: 'mengatasi-context-rot-token-limit-ai-builder-modularitas' },
+  { keyword: 'Token Limit AI', slug: 'mengatasi-context-rot-token-limit-ai-builder-modularitas' },
+  { keyword: 'Workflow Hybrid AI', slug: 'workflow-hybrid-v0-bolt-cursor-aplikasi-production-ready' },
+  { keyword: 'v0.dev', slug: 'workflow-hybrid-v0-bolt-cursor-aplikasi-production-ready' },
+  { keyword: 'Design System AI', slug: 'design-system-hack-ai-builder-ui-mewah-anti-template' },
+  { keyword: 'Git Checkpoint AI', slug: 'git-checkpoint-discipline-branching-revert-ai-app-builder' },
+  { keyword: 'Keamanan API Key AI', slug: 'keamanan-api-key-backend-offloading-ai-builder' },
+  { keyword: 'Backend Offloading', slug: 'keamanan-api-key-backend-offloading-ai-builder' },
+  { keyword: 'Rubber Duck Debugging', slug: 'meta-prompting-hack-debugging-error-ai-builder' },
+  { keyword: 'Meta-Prompting', slug: 'meta-prompting-hack-debugging-error-ai-builder' },
+  { keyword: 'Micro-SaaS AI', slug: 'roadmap-vibe-coder-ke-microsaas-founder-monetisasi-ai-builder' },
+  { keyword: 'Monetisasi AI Builder', slug: 'roadmap-vibe-coder-ke-microsaas-founder-monetisasi-ai-builder' },
+
   // Web3, Blockchain & Pembayaran Digital
   { keyword: 'Stablecoin', slug: 'revolusi-stablecoin-metode-pembayaran-global-stripe-bridge-visa' },
   { keyword: 'Account Abstraction', slug: 'account-abstraction-erc-4337-masa-depan-dompet-web3-tanpa-seed-phrase' },
